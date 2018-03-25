@@ -22,7 +22,8 @@ import (
 	"github.com/palantir/pkg/cobracli"
 
 	"github.com/palantir/godel-okgo-asset-unconvert/generated_src"
-	"github.com/palantir/godel-okgo-asset-unconvert/unconvert"
+	"github.com/palantir/godel-okgo-asset-unconvert/unconvert/config"
+	"github.com/palantir/godel-okgo-asset-unconvert/unconvert/creator"
 )
 
 func main() {
@@ -32,6 +33,6 @@ func main() {
 func checkMain(osArgs []string) int {
 	os.Args = osArgs
 	var debugFlagVal bool
-	rootCmd := checker.AssetRootCmd(unconvert.Creator(), "run unconvert check")
+	rootCmd := checker.AssetRootCmd(creator.Unconvert(), config.UpgradeConfig, "run unconvert check")
 	return cobracli.ExecuteWithDefaultParamsWithVersion(rootCmd, &debugFlagVal, "")
 }
