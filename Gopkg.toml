@@ -32,11 +32,7 @@ required = ["github.com/mdempsky/unconvert"]
 
 [[constraint]]
   name = "github.com/palantir/okgo"
-  version = "1.0.0"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/palantir/godel"
+  version = "1.2.0"
 
 [[constraint]]
   branch = "master"
