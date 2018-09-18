@@ -21,6 +21,10 @@ import (
 	"github.com/palantir/godel-okgo-asset-unconvert/unconvert"
 )
 
+func init() {
+	checker.SetGoBuildDefaultReleaseTags()
+}
+
 func Unconvert() checker.Creator {
 	return checker.NewCreator(
 		unconvert.TypeName,
