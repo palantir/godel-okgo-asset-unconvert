@@ -154,6 +154,23 @@
   revision = "6ef6fc2811e260af0641aae25a45881217b3cf3d"
 
 [[projects]]
+  digest = "1:21ecc8a8689a0c92d18c06acbeea6efa08afb8eb5a8ccf78c756d05ef9165dd7"
+  name = "github.com/palantir/godel-okgo-asset-unconvert"
+  packages = [
+    "generated_src",
+    "generated_src/internal/github.com/mdempsky/unconvert",
+    "generated_src/internal/github.com/mdempsky/unconvert/amalgomated_flag",
+    "unconvert",
+    "unconvert/config",
+    "unconvert/config/internal/legacy",
+    "unconvert/config/internal/v0",
+    "unconvert/creator",
+  ]
+  pruneopts = "UT"
+  revision = "6c770ba2b037fb85990b237eb4d33b3dac8c392f"
+  version = "v1.1.0"
+
+[[projects]]
   digest = "1:0b29cbfa2693c66eb778625dfcf20abbedd10b14d6f4600414405ab98ee7dcac"
   name = "github.com/palantir/okgo"
   packages = [
@@ -301,6 +318,14 @@
     "github.com/mdempsky/unconvert",
     "github.com/nmiyake/pkg/gofiles",
     "github.com/palantir/amalgomate/amalgomated",
+    "github.com/palantir/godel-okgo-asset-unconvert/generated_src",
+    "github.com/palantir/godel-okgo-asset-unconvert/generated_src/internal/github.com/mdempsky/unconvert",
+    "github.com/palantir/godel-okgo-asset-unconvert/generated_src/internal/github.com/mdempsky/unconvert/amalgomated_flag",
+    "github.com/palantir/godel-okgo-asset-unconvert/unconvert",
+    "github.com/palantir/godel-okgo-asset-unconvert/unconvert/config",
+    "github.com/palantir/godel-okgo-asset-unconvert/unconvert/config/internal/legacy",
+    "github.com/palantir/godel-okgo-asset-unconvert/unconvert/config/internal/v0",
+    "github.com/palantir/godel-okgo-asset-unconvert/unconvert/creator",
     "github.com/palantir/godel/framework/pluginapitester",
     "github.com/palantir/godel/pkg/products/v2/products",
     "github.com/palantir/godel/pkg/versionedconfig",
