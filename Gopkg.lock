@@ -66,12 +66,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:ba007c664a86a9d8c08f41941ca5c14e9d84961d812ead914954d0a188b75aa3"
+  digest = "1:187e3a0cec0c1052a17846552a634232189f6c17e05045f58706bec74fc32ce0"
   name = "github.com/mdempsky/unconvert"
   packages = ["."]
   pruneopts = "UT"
-  revision = "a8910796385a434cdbcdf6c43f4e54a82f8e51a5"
-  source = "github.com/nmiyake/unconvert"
+  revision = "e987b08c78afd9b7d5232b23fc38f44b99cc2056"
 
 [[projects]]
   digest = "1:e05db7d2d85e06b7973561483c4accb8fa67037ff851c69641d9c281b4c36102"
