@@ -22,11 +22,9 @@
 
 required = ["github.com/mdempsky/unconvert"]
 
-# Need to use fork until PR that fixes https://github.com/mdempsky/unconvert/issues/34 is merged (adds Go module support)
 [[constraint]]
   name = "github.com/mdempsky/unconvert"
   branch = "master"
-  source = "github.com/nmiyake/unconvert"
 
 [[constraint]]
   name = "github.com/palantir/amalgomate"
