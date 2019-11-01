@@ -59,6 +59,10 @@ func TestCheck(t *testing.T) {
 				Name: "unnecessary conversions",
 				Specs: []gofiles.GoFileSpec{
 					{
+						RelPath: "go.mod",
+						Src:     "module foo",
+					},
+					{
 						RelPath: "foo.go",
 						Src: `package foo
 
@@ -80,6 +84,10 @@ Check(s) produced output: [unconvert]
 			{
 				Name: "unnecessary conversions in file from inner directory",
 				Specs: []gofiles.GoFileSpec{
+					{
+						RelPath: "go.mod",
+						Src:     "module foo",
+					},
 					{
 						RelPath: "foo.go",
 						Src: `package foo
