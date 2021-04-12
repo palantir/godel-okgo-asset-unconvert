@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sort"
 
-	unconvert "github.com/palantir/godel-okgo-asset-unconvert/generated_src/internal/github.com/mdempsky/unconvert"
+	unconvert "."
 )
 
 var programs = map[string]func(){"unconvert": func() {

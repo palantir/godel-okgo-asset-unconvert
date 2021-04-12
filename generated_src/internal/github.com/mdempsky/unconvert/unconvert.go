@@ -8,7 +8,7 @@ package amalgomated
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/palantir/godel-okgo-asset-unconvert/generated_src/internal/github.com/mdempsky/unconvert/amalgomated_flag"
+	"amalgomated_flag"
 	"fmt"
 	"go/ast"
 	"go/build"
