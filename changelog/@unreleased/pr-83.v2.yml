@@ -1,0 +1,5 @@
+type: improvement
+improvement:
+  description: Updates github.com/mdempsky/unconvert to v0.0.0-20200228143138-95ecdbfc0b5f
+  links:
+  - https://github.com/palantir/godel-okgo-asset-unconvert/pull/83
