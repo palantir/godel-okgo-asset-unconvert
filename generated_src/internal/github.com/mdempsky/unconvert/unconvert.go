@@ -11,7 +11,6 @@ import (
 	"github.com/palantir/godel-okgo-asset-unconvert/generated_src/internal/github.com/mdempsky/unconvert/amalgomated_flag"
 	"fmt"
 	"go/ast"
-	"go/build"
 	"go/format"
 	"go/parser"
 	"go/token"
@@ -23,11 +22,11 @@ import (
 	"reflect"
 	"runtime/pprof"
 	"sort"
+	"strings"
 	"sync"
 	"unicode"
 
 	"golang.org/x/text/width"
-	"golang.org/x/tools/go/buildutil"
 	"golang.org/x/tools/go/packages"
 )
 
@@ -35,6 +34,31 @@ import (
 // of their left parenthesis within a source file.
 
 type editSet map[token.Position]struct{}
+
+func (e editSet) add(pos token.Position) {
+	pos.Offset = 0
+	e[pos] = struct{}{}
+}
+
+func (e editSet) has(pos token.Position) bool {
+	pos.Offset = 0
+	_, ok := e[pos]
+	return ok
+}
+
+func (e editSet) remove(pos token.Position) {
+	pos.Offset = 0
+	delete(e, pos)
+}
+
+// intersect removes positions from e that are not present in x.
+func (e editSet) intersect(x editSet) {
+	for pos := range e {
+		if _, ok := x[pos]; !ok {
+			delete(e, pos)
+		}
+	}
+}
 
 type fileToEditSet map[string]editSet
 
@@ -99,11 +123,11 @@ func (e *editor) rewrite(f *ast.Expr) {
 	}
 
 	pos := e.file.Position(call.Lparen)
-	if _, ok := e.edits[pos]; !ok {
+	if !e.edits.has(pos) {
 		return
 	}
 	*f = call.Args[0]
-	delete(e.edits, pos)
+	e.edits.remove(pos)
 }
 
 var (
@@ -172,15 +196,13 @@ var (
 	flagV		= flag.Bool("v", false, "verbose output")
 	flagTests	= flag.Bool("tests", true, "include test source files")
 	flagFastMath	= flag.Bool("fastmath", false, "remove conversions that force intermediate rounding")
+	flagTags	= flag.String("tags", "", "a space-separated list of build tags to consider satisfied during the build")
+	flagConfigs	= flag.String("configs", "", "custom configs to run unconvert (experimental)")
 )
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "usage: unconvert [flags] [package ...]\n")
 	flag.PrintDefaults()
-}
-
-func init() {
-	flag.Var((*buildutil.TagsFlag)(&build.Default.BuildTags), "tags", buildutil.TagsFlagDoc)
 }
 
 func AmalgomatedMain() {
@@ -196,17 +218,28 @@ func AmalgomatedMain() {
 		defer pprof.StopCPUProfile()
 	}
 
-	importPaths := flag.Args()
-	if len(importPaths) == 0 {
-		return
+	patterns := flag.Args()	// 0 or more import path patterns.
+
+	var configs [][]string
+	if *flagConfigs != "" {
+		if os.Getenv("UNCONVERT_CONFIGS_EXPERIMENT") != "1" {
+			fmt.Println("WARNING: -configs is experimental and subject to change without notice.")
+			fmt.Println("Please comment at https://github.com/mdempsky/unconvert/issues/26")
+			fmt.Println("if you'd like to rely on this interface.")
+			fmt.Println("(Set UNCONVERT_CONFIGS_EXPERIMENT=1 to silence this warning.)")
+			fmt.Println()
+		}
+
+		if err := json.Unmarshal([]byte(*flagConfigs), &configs); err != nil {
+			log.Fatal(err)
+		}
+	} else if *flagAll {
+		configs = allConfigs()
+	} else {
+		configs = [][]string{nil}
 	}
 
-	var m fileToEditSet
-	if *flagAll {
-		m = mergeEdits(importPaths)
-	} else {
-		m = computeEdits(importPaths, build.Default.GOOS, build.Default.GOARCH, build.Default.CgoEnabled)
-	}
+	m := mergeEdits(patterns, configs)
 
 	if *flagApply {
 		var wg sync.WaitGroup
@@ -234,35 +267,36 @@ func AmalgomatedMain() {
 	}
 }
 
-type platform struct {
-	GOOS, GOARCH string
-}
-
-func allPlatforms() []platform {
+func allConfigs() [][]string {
 	out, err := exec.Command("go", "tool", "dist", "list", "-json").Output()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var res []platform
-	err = json.Unmarshal(out, &res)
+	var platforms []struct {
+		GOOS, GOARCH string
+	}
+	err = json.Unmarshal(out, &platforms)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	var res [][]string
+	for _, platform := range platforms {
+		res = append(res, []string{
+			"GOOS=" + platform.GOOS,
+			"GOARCH=" + platform.GOARCH,
+		})
+	}
 	return res
 }
 
-func mergeEdits(importPaths []string) fileToEditSet {
+func mergeEdits(patterns []string, configs [][]string) fileToEditSet {
 	m := make(fileToEditSet)
-	for _, plat := range allPlatforms() {
-		for f, e := range computeEdits(importPaths, plat.GOOS, plat.GOARCH, false) {
+	for _, config := range configs {
+		for f, e := range computeEdits(patterns, config) {
 			if e0, ok := m[f]; ok {
-				for k := range e0 {
-					if _, ok := e[k]; !ok {
-						delete(e0, k)
-					}
-				}
+				e0.intersect(e)
 			} else {
 				m[f] = e
 			}
@@ -271,20 +305,23 @@ func mergeEdits(importPaths []string) fileToEditSet {
 	return m
 }
 
-func computeEdits(importPaths []string, osname, arch string, cgoEnabled bool) fileToEditSet {
-	cgoEnabledVal := "0"
-	if cgoEnabled {
-		cgoEnabledVal = "1"
+func computeEdits(patterns []string, config []string) fileToEditSet {
+	// TODO(mdempsky): Move into config?
+	var buildFlags []string
+	if *flagTags != "" {
+		buildFlags = []string{"-tags", *flagTags}
 	}
 
 	pkgs, err := packages.Load(&packages.Config{
-		Mode:	packages.LoadSyntax,
-		Env:	append(os.Environ(), "GOOS="+osname, "GOARCH="+arch, "CGO_ENABLED="+cgoEnabledVal),
-		Tests:	*flagTests,
-	}, importPaths...)
+		Mode:		packages.LoadSyntax,
+		Env:		append(os.Environ(), config...),
+		BuildFlags:	buildFlags,
+		Tests:		*flagTests,
+	}, patterns...)
 	if err != nil {
 		log.Fatal(err)
 	}
+	packages.PrintErrors(pkgs)
 
 	type res struct {
 		file	string
@@ -296,12 +333,20 @@ func computeEdits(importPaths []string, osname, arch string, cgoEnabled bool) fi
 	for _, pkg := range pkgs {
 		for _, file := range pkg.Syntax {
 			pkg, file := pkg, file
+			tokenFile := pkg.Fset.File(file.Package)
+			filename := tokenFile.Position(file.Package).Filename
+
+			// Hack to recognize _cgo_gotypes.go.
+			if strings.HasSuffix(filename, "-d") || strings.HasSuffix(filename, "/_cgo_gotypes.go") {
+				continue
+			}
+
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				v := visitor{info: pkg.TypesInfo, file: pkg.Fset.File(file.Package), edits: make(editSet)}
+				v := visitor{info: pkg.TypesInfo, file: tokenFile, edits: make(editSet)}
 				ast.Walk(&v, file)
-				ch <- res{v.file.Name(), v.edits}
+				ch <- res{filename, v.edits}
 			}()
 		}
 	}
@@ -371,8 +416,10 @@ func (v *visitor) unconvert(call *ast.CallExpr) {
 		// A real conversion.
 		return
 	}
-	if !*flagFastMath && isFloatingPoint(ft.Type) && isOperation(call.Args[0]) && isOperation(v.path[len(v.path)-2].n) {
-		// Go 1.9 gives different semantics to "T(a*b)+c" and "a*b+c".
+	if !*flagFastMath && isFloatingPoint(ft.Type) {
+		// As of Go 1.9, explicit floating-point type
+		// conversions are always significant because they
+		// force rounding and prevent operation fusing.
 		return
 	}
 	if isUntypedValue(call.Args[0], v.info) {
@@ -384,15 +431,8 @@ func (v *visitor) unconvert(call *ast.CallExpr) {
 		fmt.Println("Skipped a possible type conversion because of -safe at", v.file.Position(call.Pos()))
 		return
 	}
-	if v.isCgoCheckPointerContext() {
-		// cmd/cgo generates explicit type conversions that
-		// are often redundant when introducing
-		// _cgoCheckPointer calls (issue #16).  Users can't do
-		// anything about these, so skip over them.
-		return
-	}
 
-	v.edits[v.file.Position(call.Lparen)] = struct{}{}
+	v.edits.add(v.file.Position(call.Lparen))
 }
 
 // isFloatingPointer reports whether t's underlying type is a floating
@@ -400,31 +440,6 @@ func (v *visitor) unconvert(call *ast.CallExpr) {
 func isFloatingPoint(t types.Type) bool {
 	ut, ok := t.Underlying().(*types.Basic)
 	return ok && ut.Info()&(types.IsFloat|types.IsComplex) != 0
-}
-
-// isOperation reports whether n is an arithmetic operation expression.
-func isOperation(n ast.Node) bool {
-	switch n.(type) {
-	case *ast.BinaryExpr, *ast.UnaryExpr:
-		return true
-	}
-	return false
-}
-
-func (v *visitor) isCgoCheckPointerContext() bool {
-	ctxt := &v.path[len(v.path)-2]
-	if ctxt.i != 1 {
-		return false
-	}
-	call, ok := ctxt.n.(*ast.CallExpr)
-	if !ok {
-		return false
-	}
-	ident, ok := call.Fun.(*ast.Ident)
-	if !ok {
-		return false
-	}
-	return ident.Name == "_cgoCheckPointer"
 }
 
 // isSafeContext reports whether the current context requires
