@@ -15,10 +15,9 @@
 package creator
 
 import (
+	"github.com/palantir/godel-okgo-asset-unconvert/unconvert"
 	"github.com/palantir/okgo/checker"
 	"github.com/palantir/okgo/okgo"
-
-	"github.com/palantir/godel-okgo-asset-unconvert/unconvert"
 )
 
 func Unconvert() checker.Creator {
