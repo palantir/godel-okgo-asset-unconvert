@@ -6,7 +6,7 @@ require (
 	github.com/mdempsky/unconvert v0.0.0-20200228143138-95ecdbfc0b5f
 	github.com/nmiyake/pkg/gofiles v1.2.0
 	github.com/palantir/amalgomate v1.7.1
-	github.com/palantir/godel/v2 v2.59.0
+	github.com/palantir/godel/v2 v2.60.0
 	github.com/palantir/okgo v1.11.0
 	github.com/palantir/pkg/cobracli v1.1.0
 	github.com/pkg/errors v0.9.1
@@ -42,7 +42,7 @@ require (
 	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rogpeppe/go-internal v1.7.0 // indirect
-	github.com/spf13/cobra v1.4.0 // indirect
+	github.com/spf13/cobra v1.5.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/ulikunitz/xz v0.5.10 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
