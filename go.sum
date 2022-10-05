@@ -186,8 +186,8 @@ github.com/palantir/amalgomate v1.7.1/go.mod h1:yK+2gLh/2LhzsCF0xoXaWdckL6eGIsoO
 github.com/palantir/distgo/pkg/git v1.0.0/go.mod h1:eXrr3SOmf/sWTYmtiubYVxSaVegTlMGgRgBUFMFFedw=
 github.com/palantir/godel/pkg/products/v2 v2.0.0/go.mod h1:SaLUycZLVP5qV6mL9MWG3jkX4dS23lJnzpubTGAV4FU=
 github.com/palantir/godel/v2 v2.36.1/go.mod h1:gtwmZT0EERqvpjo3JhMpD5WtsUc5MPjkJkqhPM6l5vw=
-github.com/palantir/godel/v2 v2.67.0 h1:VhugXtSktSY4Gvua+zszEn5gL53EsUqh29LD21inCG0=
-github.com/palantir/godel/v2 v2.67.0/go.mod h1:gl3KXZLAEtVdsSICF9E9oYjZPWFCm8AvHbbhsvRsUOY=
+github.com/palantir/godel/v2 v2.68.0 h1:djIrPtvMc2oMM6TspyBcpJsj2n3ZN1oLNWrsCny3928=
+github.com/palantir/godel/v2 v2.68.0/go.mod h1:+0u4xHCcMWEu5Z4RnmWymxj/tPepLrjS/kLZF34SXwI=
 github.com/palantir/okgo v1.11.0 h1:cWsqscGhsGmzMCF+SIsOlwslBeeGmOgIT4FYWIGG9hE=
 github.com/palantir/okgo v1.11.0/go.mod h1:PYy5wlbXki9d83UB4UAL5q9DQxikLH+nIqmLhev5erg=
 github.com/palantir/pkg v1.0.1/go.mod h1:Eo6Jl0UXfT+65sLXJOcU9duu0WPvKsWFXCb0dE5VWZs=
@@ -197,8 +197,8 @@ github.com/palantir/pkg/cobracli v1.0.1/go.mod h1:UfYLriXzhyx7a3r+3UTD+kbX+xASjr
 github.com/palantir/pkg/cobracli v1.2.0 h1:hANp5fUB5cX90SVri97Apz4xB3BqnZw0gP2jMQ34G8Y=
 github.com/palantir/pkg/cobracli v1.2.0/go.mod h1:8poQy1FM1lISezW7Czmhmj7I0xEVpuYpv/ywgsAzv0Y=
 github.com/palantir/pkg/gittest v1.0.0/go.mod h1:M49S4TsX5sh7lYJmOF+pFzcB4fJNOylzN8tOdpSq958=
-github.com/palantir/pkg/gittest v1.0.1 h1:SMGj38NLGzEpW1LFfGAitWprywHorJTmfOpJS/9kv/Y=
 github.com/palantir/pkg/gittest v1.0.1/go.mod h1:Rhmt7mtHdp+6c3gWZDAsXTBk5AUZwnfahsw5w6WWrbc=
+github.com/palantir/pkg/gittest v1.1.0 h1:BtPlqZpDZZs5T/t5uDLycXPIzBo+9rDFcvvMWL6f/qg=
 github.com/palantir/pkg/matcher v1.0.0/go.mod h1:QCvRrP7D1ZwHguKkovtcPbr0i2L8GYXQxq9EUn/ME6s=
 github.com/palantir/pkg/matcher v1.0.1/go.mod h1:sd+kIUk+WUutEFrOkUFpSkxM9xJ49TnOQJ5c4UQeHUI=
 github.com/palantir/pkg/matcher v1.2.0 h1:h4IeYPSQGWIdi1Qh7QSzWATv0+2coTaaCiozYtPWBks=
