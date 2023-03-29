@@ -6,7 +6,7 @@ require (
 	github.com/mdempsky/unconvert v0.0.0-20200228143138-95ecdbfc0b5f
 	github.com/nmiyake/pkg/gofiles v1.2.0
 	github.com/palantir/amalgomate v1.7.1
-	github.com/palantir/godel/v2 v2.81.0
+	github.com/palantir/godel/v2 v2.82.0
 	github.com/palantir/okgo v1.11.0
 	github.com/palantir/pkg/cobracli v1.2.0
 	github.com/pkg/errors v0.9.1
