@@ -1,6 +1,6 @@
 module github.com/palantir/godel-okgo-asset-unconvert
 
-go 1.20
+go 1.21
 
 require (
 	github.com/mdempsky/unconvert v0.0.0-20200228143138-95ecdbfc0b5f
