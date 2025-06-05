@@ -6,12 +6,12 @@ require (
 	github.com/mdempsky/unconvert v0.0.0-20200228143138-95ecdbfc0b5f
 	github.com/nmiyake/pkg/gofiles v1.2.0
 	github.com/palantir/amalgomate v1.49.0
-	github.com/palantir/godel/v2 v2.127.0
+	github.com/palantir/godel/v2 v2.131.0
 	github.com/palantir/okgo v1.63.0
 	github.com/palantir/pkg/cobracli v1.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.10.0
-	golang.org/x/text v0.25.0
+	golang.org/x/text v0.26.0
 	golang.org/x/tools v0.33.0
 	gopkg.in/yaml.v2 v2.4.0
 )
@@ -45,8 +45,8 @@ require (
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/ulikunitz/xz v0.5.10 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
-	golang.org/x/mod v0.24.0 // indirect
-	golang.org/x/sync v0.14.0 // indirect
+	golang.org/x/mod v0.25.0 // indirect
+	golang.org/x/sync v0.15.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
