@@ -3,7 +3,7 @@ module github.com/palantir/godel-okgo-asset-unconvert
 go 1.25.0
 
 require (
-	github.com/mdempsky/unconvert v0.0.0-20200228143138-95ecdbfc0b5f
+	github.com/mdempsky/unconvert v0.0.0-20250216222326-4a038b3d31f5
 	github.com/nmiyake/pkg/gofiles v1.2.0
 	github.com/palantir/amalgomate v1.52.0
 	github.com/palantir/godel/v2 v2.140.0
