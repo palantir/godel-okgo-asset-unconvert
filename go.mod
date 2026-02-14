@@ -6,7 +6,7 @@ require (
 	github.com/mdempsky/unconvert v0.0.0-20250216222326-4a038b3d31f5
 	github.com/nmiyake/pkg/gofiles v1.2.0
 	github.com/palantir/amalgomate v1.52.0
-	github.com/palantir/godel/v2 v2.147.0
+	github.com/palantir/godel/v2 v2.149.0
 	github.com/palantir/okgo v1.64.0
 	github.com/palantir/pkg/cobracli v1.3.0
 	github.com/pkg/errors v0.9.1
@@ -26,7 +26,7 @@ require (
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	github.com/klauspost/compress v1.18.3 // indirect
+	github.com/klauspost/compress v1.18.4 // indirect
 	github.com/klauspost/pgzip v1.2.6 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
