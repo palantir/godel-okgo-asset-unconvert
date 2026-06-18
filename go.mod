@@ -8,13 +8,13 @@ require (
 	github.com/mdempsky/unconvert v0.0.0-20250216222326-4a038b3d31f5
 	github.com/nmiyake/pkg/gofiles v1.2.0
 	github.com/palantir/amalgomate v1.57.0
-	github.com/palantir/godel/v2 v2.156.0
+	github.com/palantir/godel/v2 v2.157.0
 	github.com/palantir/okgo v1.68.0
 	github.com/palantir/pkg/cobracli v1.3.0
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.11.1
 	golang.org/x/text v0.38.0
-	golang.org/x/tools v0.45.0
+	golang.org/x/tools v0.46.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
