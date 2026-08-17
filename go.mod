@@ -5,7 +5,7 @@ go 1.26.0
 toolchain go1.26.5
 
 require (
-	github.com/mdempsky/unconvert v0.0.0-20250216222326-4a038b3d31f5
+	github.com/mdempsky/unconvert v0.0.0-20260816212528-33842c47157a
 	github.com/nmiyake/pkg/gofiles v1.2.0
 	github.com/palantir/amalgomate v1.58.0
 	github.com/palantir/godel/v2 v2.170.0
