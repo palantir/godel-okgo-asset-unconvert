@@ -2,6 +2,8 @@ module github.com/palantir/godel-okgo-asset-unconvert
 
 go 1.27.0
 
+toolchain go1.27.1
+
 require (
 	github.com/mdempsky/unconvert v0.0.0-20260816212528-33842c47157a
 	github.com/nmiyake/pkg/gofiles v1.2.0
