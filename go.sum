@@ -41,8 +41,8 @@ github.com/mattn/go-isatty v0.0.24 h1:tGZZoVgT/KiqK1c8ocVLeDS8BSWMRd47J3Lbz7vsRe
 github.com/mattn/go-isatty v0.0.24/go.mod h1:nMCL3Zebbrt45jsMDgnfIwz6ydEQApk5oEI3HqDio6A=
 github.com/mattn/go-runewidth v0.0.31 h1:1oCV4ReTlosDBc6rYRw5cL8S/4y8iv5oRl4SJ5IBgwo=
 github.com/mattn/go-runewidth v0.0.31/go.mod h1:3qAiGCV4Koz/yuveO58qUefmUTRm8r0IGEXZ9jeHp/8=
-github.com/mdempsky/unconvert v0.0.0-20260816212528-33842c47157a h1:ZAqs+Ol0lzcrhLc3X/f8mvopzyLwdNYGYb1I46ryO/k=
-github.com/mdempsky/unconvert v0.0.0-20260816212528-33842c47157a/go.mod h1:KcJs0esLZFvqwNP/z4G7KuoWrs4e9OUYhKvPpwgdX3U=
+github.com/mdempsky/unconvert v0.0.0-20261020133855-975dd2843474 h1:KBVI+MPrfbOEKInXKL9ZiSC7quyOV27mSk8rrRN70ho=
+github.com/mdempsky/unconvert v0.0.0-20261020133855-975dd2843474/go.mod h1:hI8pOVxYDmzNSCSA21yPB8Q798FsJBKI5agobLsQ6VI=
 github.com/mholt/archiver/v3 v3.5.1 h1:rDjOBX9JSF5BvoJGvjqK479aL70qh9DIpZCl+k7Clwo=
 github.com/mholt/archiver/v3 v3.5.1/go.mod h1:e3dqJ7H78uzsRSEACH1joayhuSyhnonssnDhppzS1L4=
 github.com/nmiyake/pkg v1.0.0/go.mod h1:078BHtQj5Tk8Im6EpMHR0/Stp79lwL3FIRiGaC9hTDM=

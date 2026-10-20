@@ -5,7 +5,7 @@ go 1.27.0
 toolchain go1.27.3
 
 require (
-	github.com/mdempsky/unconvert v0.0.0-20260816212528-33842c47157a
+	github.com/mdempsky/unconvert v0.0.0-20261020133855-975dd2843474
 	github.com/nmiyake/pkg/gofiles v1.2.0
 	github.com/palantir/amalgomate v1.61.0
 	github.com/palantir/godel/v2 v2.203.0

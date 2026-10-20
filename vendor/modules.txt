@@ -58,8 +58,8 @@ github.com/mattn/go-isatty
 # github.com/mattn/go-runewidth v0.0.31
 ## explicit; go 1.23
 github.com/mattn/go-runewidth
-# github.com/mdempsky/unconvert v0.0.0-20260816212528-33842c47157a
-## explicit; go 1.25.0
+# github.com/mdempsky/unconvert v0.0.0-20261020133855-975dd2843474
+## explicit; go 1.26.0
 github.com/mdempsky/unconvert
 # github.com/mholt/archiver/v3 v3.5.1
 ## explicit; go 1.13
